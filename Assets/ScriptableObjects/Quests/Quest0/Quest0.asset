@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68eeb1bff8230fd41ad4bd1db1c061f2, type: 3}
+  m_Name: Quest0
+  m_EditorClassIdentifier: 
+  Name: Go to Village
+  Description: Talk with Villager
+  icon: {fileID: 0}
+  id: 0
+  objectives:
+  - {fileID: 11400000, guid: 4740c797152294f489e00e6bf044607d, type: 2}
+  - {fileID: 11400000, guid: 56c84b9ef3c64ef4283c544ce2a4f164, type: 2}
