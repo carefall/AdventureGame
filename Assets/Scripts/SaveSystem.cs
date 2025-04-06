@@ -12,15 +12,6 @@ public class SaveSystem
     {
         File.Create(Application.dataPath+$"/slot{slot}.json").Close();
         SaveData data = new();
-        var states = new QuestStates
-        {
-            id = 0,
-            states = new int[] { 0, -1 },
-            amounts = new int[] { 0, 0 },
-        };
-        QuestStates[] quests = new QuestStates[1];
-        quests[0] = states;
-        data.quests = quests;
         data.completedQuests = new int[0];
         data.failedQuests = new int[0];
         data.deadUniqueNPCs = new string[0];
