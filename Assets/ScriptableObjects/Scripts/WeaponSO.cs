@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WeaponSO : ItemSO
 {
-
+    public enum Type 
+    {
+        Single, Shield, Bow, Double
+    }
 #if UNITY_EDITOR
     [MenuItem("Items/Create Weapon")]
     public static void Create()
@@ -18,40 +21,35 @@ public class WeaponSO : ItemSO
         AssetDatabase.Refresh();
     }
 #endif
-    [Range(-1, 128)]
-    public int scopeAttachId = -1;
-    [Range(-1, 128)]
-    public int silencerAttachId = -1;
-    [Range(-1, 128)]
-    public int barrelAttachId = -1;
-    [Range(1, 1000000)]
-    public int endurance = 10000;
-    public bool unbreakable;
-    [ShowIf("WithScope")]
-    public Sprite withScope;
-    [ShowIf("WithSilencer")]
-    public Sprite withSilencer;
-    [ShowIf("WithBarrel")]
-    public Sprite withBarrel;
-    [ShowIf(EConditionOperator.And, "WithScope", "WithBarrel")]
-    public Sprite withScopeAndBarrel;
-    [ShowIf(EConditionOperator.And, "WithScope", "WithSilencer")]
-    public Sprite withScopeAndSilencer;
-    [ShowIf(EConditionOperator.And, "WithSilencer", "WithBarrel")]
-    public Sprite withSilencerAndBarrel;
-    [ShowIf(EConditionOperator.And, "WithScope", "WithBarrel", "WithSilencer")]
-    public Sprite withAll;
-
-    public AmmoSO ammoType;
-    public BarrelAmmoSO barrelAmmoType;
-
-    public enum SlotType
+    public int damage;
+    public Type type;
+    public GameObject model;
+    public string GetDrawAnimationName()
     {
-        MAIN, SECONDARY, GRENADE
+        switch (type)
+        {
+            case Type.Single:
+                return "DrawSword";
+            case Type.Double:
+                return "DrawDouble";
+            case Type.Bow:
+                return "DrawBow";
+            default:
+                return "";
+        }
     }
-
-    private bool WithScope() => scopeAttachId >= 0;
-    private bool WithBarrel() => barrelAttachId >= 0;
-
-    private bool WithSilencer() => silencerAttachId >= 0;
+    public string GetSheatheAnimationName()
+    {
+        switch (type)
+        {
+            case Type.Single:
+                return "SheatheSword";
+            case Type.Double:
+                return "SheatheDouble";
+            case Type.Bow:
+                return "SheatheBow";
+            default:
+                return "";
+        }
+    }
 }

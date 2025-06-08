@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,13 @@ public class StartBot : MonoBehaviour
     [SerializeField] Animator anim;
     void Start()
     {
+        SaveData save = SaveSystem.GetSaveData();
+        if (save.completedQuests.Contains(0) || save.quests.Length>0)
+        {
+            anim.Play("Idle");
+            Destroy(this);
+            return;
+        }
         agent.destination = player.position;
     }
     void Update()

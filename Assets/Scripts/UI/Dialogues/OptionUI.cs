@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static DialogueStage;
 using static DialogueStage.Answer;
@@ -40,10 +42,15 @@ public class OptionUI : MonoBehaviour
 
     public void Process()
     {
+        StartCoroutine(Next());
+    }
+    
+    private IEnumerator Next()
+    {
+        yield return new WaitForEndOfFrame();
         if (answer.action == AnswerAction.CLOSE_DIALOGUE)
         {
             DialogueUI.instance.CloseDialogue();
-            return;
         }
         else if (answer.action == AnswerAction.GIVE_QUEST)
         {
@@ -54,29 +61,28 @@ public class OptionUI : MonoBehaviour
         }
         else if (answer.action == AnswerAction.TURN_HOSTILE)
         {
-           // DialogueWindow.instance.TurnHostile();
+            // DialogueWindow.instance.TurnHostile();
         }
         else if (answer.action == AnswerAction.HEAL_TARGET)
         {
-           // DialogueWindow.instance.HealTarget();
+            // DialogueWindow.instance.HealTarget();
         }
         else if (answer.action == AnswerAction.GIVE_ITEMS)
         {
-           // DialogueWindow.instance.GiveItems(answer.answer, answer.nextStageId, answer.requiredItems);
+            // DialogueWindow.instance.GiveItems(answer.answer, answer.nextStageId, answer.requiredItems);
         }
         else if (answer.action == AnswerAction.RECEIVE_ITEMS)
         {
-          // DialogueWindow.instance.ReceiveItems(answer.answer, answer.nextStageId, answer.receivedItems);
+            // DialogueWindow.instance.ReceiveItems(answer.answer, answer.nextStageId, answer.receivedItems);
         }
         else if (answer.action == AnswerAction.HEAL_PLAYER)
         {
-          //  DialogueWindow.instance.Heal(answer.nextStageId);
+            //  DialogueWindow.instance.Heal(answer.nextStageId);
         }
         else
         {
             DialogueUI.instance.Next(answer.answer, answer.nextStageId);
         }
     }
-
 
 }
