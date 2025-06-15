@@ -5,7 +5,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] Sprite blank;
-    private static Inventory instance;
+    public static Inventory instance;
+    private Slot start;
+    [SerializeField] TransferItem item;
     public static Sprite Blank()
     {
         if (instance == null)
@@ -14,6 +16,7 @@ public class Inventory : MonoBehaviour
         }
         return instance.blank;
     }
+    
     private void OnEnable()
     {
         instance = this;
@@ -49,14 +52,25 @@ public class Inventory : MonoBehaviour
             Slot s = transform.GetChild(i).GetComponent<Slot>();
             if (s.item == null)
             {
-                s.SetItem(item);
+                s.SetItem(item, 1);
                 return;
             }
         }
     }
-    public void TransferItem(Slot start, Slot end)
+    public void TransferItem(Slot end)
     {
-
+        if (start == null) return;
+        (ItemSO, int) item1 = (start.item, start.amount);
+        (ItemSO, int) item2 = (end.item, end.amount);
+        start.SetItem(item2.Item1, item2.Item2);
+        end.SetItem(item1.Item1, item1.Item2);
+        item.Stop();
+        start = null;
+    }
+    public void BeginTransfer(Slot start)
+    {
+        this.start = start;
+        item.Setup(start.item.sprite);
     }
     public void DropItem(Slot slot)
     {
