@@ -62,6 +62,12 @@ public class Slot : MonoBehaviour
     {
         this.item = item;
         this.amount = amount;
+        if (item == null)
+        {
+            sprite.sprite = Inventory.Blank();
+            amountText.text = "";
+            return;
+        }
         sprite.sprite = item.sprite;
         amountText.text = amount.ToString();
     }

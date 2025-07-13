@@ -59,8 +59,18 @@ public class Inventory : MonoBehaviour
     }
     public void TransferItem(Slot end)
     {
+        Debug.Log(end.gameObject.name);
         if (start == null) return;
         (ItemSO, int) item1 = (start.item, start.amount);
+        if (end.item == null)
+        {
+            end.SetItem(item1.Item1, item1.Item2);
+            start.SetItem(null, 0);
+            item.Stop();
+            start = null;
+            return;
+            
+        }
         (ItemSO, int) item2 = (end.item, end.amount);
         start.SetItem(item2.Item1, item2.Item2);
         end.SetItem(item1.Item1, item1.Item2);
